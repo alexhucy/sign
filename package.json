@@ -1,0 +1,30 @@
+{
+  "name": "sign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "eslint": "^3.8.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "gulp-eslint": "^3.0.1",
+    "log4js": "^0.6.38",
+    "wechat": "^2.0.3",
+    "wechat-api": "^1.31.0",
+    "wechat-oauth": "^1.1.1"
+  }
+}
