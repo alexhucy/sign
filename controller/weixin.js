@@ -72,7 +72,7 @@ module.exports = {
 	/**
 	 * 报名form提交
 	 */
-	sign: function (req, res) {
+	sign: function (req, res,data) {
 		var data = req.body
 		wxService.sign(data, function (err, data) {
 			if(err === '' || err === null || err === undefined){

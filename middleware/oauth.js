@@ -14,7 +14,8 @@ module.exports = function (req, res, next) {
 	}
 	wxService.getInfoFromWeixin(code, function (err, result) {
 		if(err) {
-			res.redirect(wxService.getAuthorizeURL(config.domain + req.path,'', 'snsapi_userinfo'))
+			// res.redirect(wxService.getAuthorizeURL(config.domain + req.path,'', 'snsapi_userinfo'))
+			res.render('index')
 		}
 		else if(result && result.subscribe) {
 			wxService.getToken(result, function (err, token) {

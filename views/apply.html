@@ -18,29 +18,26 @@
 <!--报名表单-->
     <div class="bm-content" >
         <form action="">
-        <input class="input-text" type="text" placeholder="参赛者姓名" onfocus="FocusIn(this,'参赛者姓名')" onblur="NameLenFocusOut(this)" required name="user_name">
-        <div class="bm-select" id="element_id" style="position: relative;">
-            <select class="province" data-first-title="选择省" required name="province_name">
+        <input class="input-text" type="text" placeholder="参赛者姓名" onfocus="FocusIn(this,'参赛者姓名')" onblur="NameLenFocusOut(this)"  name="user_name">
+        <div class="bm-select" id="demo" style="position: relative;">
+            <select id="province" name="province" onfocus="change(this)">
             </select>
-            <select class="city" data-first-title="选择市" required name="city_name">
+            <select id="city" name="city"  onfocus="change(this)">
             </select>
-            <select class="area" data-first-title="选择区" required name="district_name">
+            <select id="area" name="area"  onfocus="change(this)">
             </select>
         </div>
-        <input class="input-text" type="text" placeholder="所在学校" required="required" name="school_name">
+        <input class="input-text" type="text" placeholder="所在学校" name="school_name" onfocus="FocusIn(this,'所在学校')" onblur="NameLenFocusOut(this)">
         <div class="bm-select" id="custom_data">
-            <select name="grade" class="group" data-first-title="选择年级组" required name="grade_name">
-                <option value="">选择年级组</option>
+            <select name="grade" class="group" name="grade_name" onfocus="change(this)">
             </select>
-            <select name="grade" class="grade" data-first-title="选择年级" required name="class_name">
-                <option value="">选择年级</option>
-                <option value=""></option>
+            <select name="grade" class="grade" name="class_name" onfocus="change(this)">
             </select>
         </div>
-        <input class="input-text" type="text" placeholder="家长姓名" required onfocus="FocusIn(this,'家长姓名')" onblur="NameLenFocusOut(this)" name="parent_name">
-        <input class="input-text" type="tel" placeholder="联系电话"  pattern="^1[34578]\d{9}$" required onfocus="FocusIn(this,'联系电话')" onblur="NumLenFocusOut(this)" name="phone_number">
-        <input class="input-text" type="text" placeholder="家庭住址" required name="address">
-        <input class="input-text" type="email" placeholder="邮箱" required onfocus="FocusIn(this,'邮箱')" onblur="EmailFocusOut(this)" name="email">
+        <input class="input-text" type="text" placeholder="家长姓名"  onfocus="FocusIn(this,'家长姓名')" onblur="NameLenFocusOut(this)" name="parent_name">
+        <input class="input-text" type="tel" placeholder="联系电话"   onfocus="FocusIn(this,'联系电话')" onblur="NumLenFocusOut(this)" name="phone_number">
+        <input class="input-text" type="text" placeholder="家庭住址"  name="address" onfocus="FocusIn(this,'家庭住址')" onblur="NameLenFocusOut(this)">
+        <input class="input-text" type="email" placeholder="邮箱"  onfocus="FocusIn(this,'邮箱')" onblur="EmailFocusOut(this)" name="email">
         <input type="submit" value="提交">
         </form>
     </div>
@@ -49,6 +46,7 @@
         <img src="/static/images/loading.gif" alt="">
     </div>
 <script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/citys.js"></script>
 <script src="/static/js/jquery.cxselect.min.js"></script>
 <script src="/static/js/interaction.js"></script>
 </body>

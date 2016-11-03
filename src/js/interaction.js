@@ -4,10 +4,10 @@
 /**
 *多级联动插件
 **/
-$('#element_id').cxSelect({
-	url: '/static/js/cityData.min.json',
-	selects: ['province','city','area'],
-});
+$('#demo').citys({
+	nodata:'hidden',
+	required:true
+})
 $('#custom_data').cxSelect({
 	selects: ['group','grade'],
 	jsonName: 'value',
@@ -15,50 +15,50 @@ $('#custom_data').cxSelect({
 	jsonSub: 'sub',
 	data: [
 		{
-			name:'100',value: '小学低龄组',sub:[
+			name:'小学低龄组',value: '小学低龄组',sub:[
 			{
-				name: '101',value: '二年级'
+				name: '二年级',value: '二年级'
 			},{
-				name: '102',value: '三年级'
+				name: '三年级',value: '三年级'
 			}
 		]
 		},
 		{
-			name: '200',value: '小学高龄组',sub:[
+			name: '小学高龄组',value: '小学高龄组',sub:[
 			{
-				name:'201',value: '四年级'
+				name:'四年级',value: '四年级'
 			},
 			{
-				name:'202',value: '五年级'
+				name:'五年级',value: '五年级'
 			},
 			{
-				name:'203',value: '六年级'
+				name:'六年级',value: '六年级'
 			}
 		]
 		},
 		{
-			name: '300',value: '初中组',sub:[
+			name: '初中组',value: '初中组',sub:[
 			{
-				name:'301',value: '初一'
+				name:'初一',value: '初一'
 			},
 			{
-				name:'302',value: '初二'
+				name:'初二',value: '初二'
 			},
 			{
-				name:'303',value: '初三'
+				name:'初三',value: '初三'
 			}
 		]
 		},
 		{
-			name: '400',value: '高中组',sub:[
+			name: '高中组',value: '高中组',sub:[
 			{
-				name:'401',value: '高一'
+				name:'高一',value: '高一'
 			},
 			{
-				name:'402',value: '高二'
+				name:'高二',value: '高二'
 			},
 			{
-				name:'403',value: '高三'
+				name:'高三',value: '高三'
 			}
 		]
 		}
@@ -86,6 +86,10 @@ function FocusIn(_this,sum1) {
 	// $(this).removeClass('invalid');
 	// $(this).attr('placeholder',data.data);
 }
+function change(_this) {
+	_this.style.border = '0';
+	_this.style.border = '1px solid #DCDCDC';
+}
 function NumLenFocusOut(_this) {
 	var number = _this.value;
 	if (number == '') return
@@ -104,35 +108,86 @@ function EmailFocusOut(_this) {
 		_this.setAttribute('placeholder','邮箱格式错误');
 	}
 }
-//封装的ByClassName和querySelectorAll
-function Select(elementClass,num_1,ElAttr,num2) {
-	if (arguments.length == 2){
-		return document.getElementsByClassName(elementClass)[num_1]
-	}
-	else if (arguments.length == 4){
-		return document.getElementsByClassName(elementClass)[num_1].querySelectorAll(ElAttr)[num2];
-	}
+function SubmitContent(_this) {
+	_this.classList.add('invalid');
+	_this.setAttribute('placeholder','输入不能为空');
 }
+//封装的ByClassName和querySelectorAll
 
 
-$('.bm-content form').on('submit',function () {
-	// var name = Select('bm-content',0,'input',0).value;     //参赛者姓名
-	// var family = Select('bm-content',0,'input',1).value;   //家长姓名
-	// var number = Select('bm-content',0,'input',2).value;   //手机号
-	// var email = Select('bm-content',0,'input',3).value;    //邮箱
-	// var province = Select('bm-content',0,'select',0).value;  //省
-	// var city = Select('bm-content',0,'select',1).value;      //市
-	// var area = Select('bm-content',0,'select',2).value;      //区
-	// var groupId = Select('bm-content',0,'select',3).value;   //分组
-	// var gradeId = Select('bm-content',0,'select',4).value;   //年级
-	// var school = Select('bm-content',0,'input',4).value;     //学校
-	// var address = Select('bm-content',0,'input',5).value;    //地址
-	//
-	// /*取分组信息的文字信息*/
-	// var groupIndex = Select('bm-content',0,'select',3).selectedIndex;
-	// var gradeIndex = Select('bm-content',0,'select',4).selectedIndex;
-	// var groupName = Select('bm-content',0,'select',3).options[groupIndex].text;
-	// var gradeName = Select('bm-content',0,'select',4).options[gradeIndex].text;
-	//
-	// return false
+$('.bm-content form input[type="submit"]').on('click',function () {
+	var name = $('.bm-content input').eq(0).val();     //参赛者姓名
+	var school = $('.bm-content input').eq(1).val();     //学校
+	var family = $('.bm-content input').eq(2).val();   //家长姓名
+	var number = $('.bm-content input').eq(3).val();   //手机号
+	var address = $('.bm-content input').eq(4).val();    //地址
+	var email = $('.bm-content input').eq(5).val();    //邮箱
+	var groupId = $('.bm-content select').eq(3).val();   //分组
+	var gradeId = $('.bm-content select').eq(4).val();   //年级
+	var province = $('.bm-content select').eq(0).val();//省
+	var city = $('.bm-content select').eq(1).val();     //市
+	var area = $('.bm-content select').eq(2).val();     //区
+
+	if (name && family && number && email && school && address && groupId && gradeId&&province&&city){
+		$('.bm-content form').submit()
+	} else {
+		if (!name){
+			$('.bm-content input').eq(0).val('');
+			$('.bm-content input').eq(0).addClass('invalid');
+			$('.bm-content input').eq(0).attr('placeholder','输入不能为空');
+		}
+		if (!family){
+			$('.bm-content input').eq(2).val('');
+			$('.bm-content input').eq(2).addClass('invalid');
+			$('.bm-content input').eq(2).attr('placeholder','输入不能为空');
+		}
+		if ($('.bm-content input[type="tel"]').hasClass('invalid')){
+			$('.bm-content input').eq(3).attr('placeholder','手机号码格式错误');
+		}else if (!number){
+			$('.bm-content input').eq(3).val('');
+			$('.bm-content input').eq(3).addClass('invalid');
+			$('.bm-content input').eq(3).attr('placeholder','输入不能为空');
+		}
+		if ($('.bm-content input[type="email"]').hasClass('invalid')){
+			$('.bm-content input').eq(3).attr('placeholder','邮箱格式错误');
+		}else if (!email){
+			$('.bm-content input').eq(5).val('');
+			$('.bm-content input').eq(5).addClass('invalid');
+			$('.bm-content input').eq(5).attr('placeholder','输入不能为空');
+		}
+		if (!address){
+			$('.bm-content input').eq(4).val('');
+			$('.bm-content input').eq(4).addClass('invalid');
+			$('.bm-content input').eq(4).attr('placeholder','输入不能为空');
+		}
+		if (!school){
+			$('.bm-content input').eq(1).val('');
+			$('.bm-content input').eq(1).addClass('invalid');
+			$('.bm-content input').eq(1).attr('placeholder','输入不能为空');
+		}
+		if (!groupId){
+			$('.bm-content select').eq(3).css('border','1px solid red');
+		}
+		if (!gradeId){
+			$('.bm-content select').eq(4).css('border','1px solid red');
+		}
+		if (!province){
+			$('.bm-content select').eq(0).css('border','1px solid red');
+		}
+		if (!city){
+			$('.bm-content select').eq(1).css('border','1px solid red');
+		}
+		if (!area){
+			$('.bm-content select').eq(2).css('border','1px solid red');
+		}
+		return false
+	}
+	/*取分组信息的文字信息*/
+
+
+
+
+
+
+
 })

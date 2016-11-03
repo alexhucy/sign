@@ -51,7 +51,6 @@ header .right{
     padding:10px 0;
     margin:5px 3%;
     box-shadow: 0px 0px 0px 2px transparent;
-    color: #eca29b;
     -webkit-transition: box-shadow 0.3s;
     transition: box-shadow 0.3s;
     text-indent: 1em;
@@ -62,7 +61,7 @@ header .right{
 }
 .input-text:focus{
     outline: none;
-    box-shadow: 0px 0px 0px 2px #eca29b;
+    box-shadow: 0px 0px 0px 2px #DCDCDC;
 }
 .bm-select{
     width:94%;
@@ -80,6 +79,9 @@ header .right{
     color: #BBBBBB;
     text-indent: 10px;
     position: relative;
+    background: url("../images/arrow.png") no-repeat right center;
+    background-size:14px;
+    background-position: right center;
 }
 .bm-select .ui-icon-unfold{
     position: absolute;
@@ -96,13 +98,13 @@ header .right{
     appearance:none;
     -moz-appearance:none;
     -webkit-appearance:none;
-    padding:10px 0;
+    padding:8px 0;
     font-weight: bold;
     margin:3%;
+    font-size:16px;
     background: #50D481;
     color: #fff;
     text-align: center;
-    letter-spacing: 1em;
 }
 
 .bm-loading{

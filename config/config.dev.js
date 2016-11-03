@@ -3,13 +3,13 @@
  */
 
 module.exports = {
-	appid: 'wxc3378269c5fd45a7',
-	appsecret: '5019a6f743905ac296df161fba2a7c4a',
+	appid: 'wxd84a057c5ec212c9',
+	appsecret: '83ab4fc43b334594d8124ab6439f9ff7',
 	mchId: '1370367102',
-	notifyUrl: 'http://edu.ngrok.chainz.net ',
+	notifyUrl: 'http://edu1.ngrok.taidii.com',
 	app_key: 'node_app',
 	app_secret:'1234',
-	domain: 'http://edu.ngrok.chainz.net',
+	domain: 'http://edu1.ngrok.taidii.com',
 	logic: {
 		host:'192.168.1.105',
 		port:'8000',
