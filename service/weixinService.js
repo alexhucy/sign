@@ -4,7 +4,12 @@
 
 var wechatAPI = require('../common/weixin').wechatAPI,
 		client = require('../common/weixin').client,
-		payment = require('../common/weixin').payment;
+		payment = require('../common/weixin').payment,
+		config = require('../config/config'),
+		logger = require('../common/logger'),
+		jwt = require('jsonwebtoken'),
+		request = require('request'),
+		http = require('http');
 
 
 module.exports = {
@@ -64,9 +69,161 @@ module.exports = {
 	 * @param callback
 	 */
 	pay: function (order, callback) {
-		console.log(payment)
 		payment.getBrandWCPayRequestParams(order, function(err, payargs){
 			callback(err, payargs)
 		});
+	},
+
+	/**
+	 * 生成token
+	 * @returns {*}
+	 */
+	createToken: function () {
+		return jwt.sign({app_key: config.app_key, time: Math.floor(Date.now()/1000), nonce: 'adgj'}, config.app_secret)
+	},
+
+	/**
+	 * @params user
+	 */
+	getToken: function (user, callback) {
+		var info = {}
+
+		if(user && user.openid && user.nickname){
+			info = {
+				"openid" : user.openid,
+				"nickname": user.nickname
+			}
+		}
+
+		var postData = JSON.stringify(info)
+		var options = {
+			host: config.logic.host,
+			port: config.logic.port,
+			path: config.logic.createUser,
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Content-Length': postData.length
+			}
+		};
+
+		var req = http.request(options, function (res) {
+			var body = ''
+			res.on('data', function (chunk) {
+				body += chunk;
+			}).on('end', function () {
+				try{
+					var data = JSON.parse(body);
+				}
+				catch (e){
+					logger.error(e)
+					return callback(e)
+				}
+				if (res.statusCode >= 200 && res.statusCode < 300) {
+					callback(null, data.token)
+				}
+				else {
+					logger.error(data)
+					callback(data)
+				}
+			})
+		});
+
+		req.on('error', function (e) {
+			logger.error(e)
+			callback(e)
+		});
+
+		req.write(postData);
+		req.end();
+	},
+	
+	/**
+	 * 提交报名信息
+	 * @param info
+	 */
+	sign: function (info, callback) {
+		var postData = JSON.stringify(info)
+		var options = {
+			host: config.logic.host,
+			port: config.logic.port,
+			path: config.logic.sign,
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Content-Length': Buffer.byteLength(postData,'utf8')
+			}
+		};
+		var req = http.request(options, function (res) {
+			var body = '';
+			res.on('data', function (chunk) {
+				body += chunk
+			}).on('end', function () {
+				try {
+					var data = JSON.parse(body);
+				}
+				catch (e){
+					logger.error(e)
+					return callback(e)
+				}
+				if(res.statusCode >= 200 && res.statusCode <300) {
+					callback(null, data)
+				}
+				else{
+					console.log(data)
+					callback(data)
+				}
+			})
+		});
+		
+		req.on('error', function (e) {
+			logger.error(e)
+			callback(e)
+		});
+		
+		req.write(postData);
+
+		req.end();
+	},
+
+
+	/**
+	 * 获取订单列表
+	 */
+	getOrderList: function (callback) {
+		request('http://'+ config.logic.host + ':' + config.logic.port + config.logic.orderList, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				try{
+					callback(null, JSON.parse(body))
+				}
+				catch (e){
+					callback(e)
+				}
+			}
+			else {
+				callback(error)
+			}
+		})
+	},
+
+	/**
+	 * 获取单个订单信息
+	 * @param id
+	 * @param callback
+	 */
+	getOrder: function (id, callback) {
+		request('http://'+ config.logic.host + ':' + config.logic.port + config.logic.orderInfo.replace('{id}', id), function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				try{
+					callback(null, JSON.parse(body))
+				}
+				catch (e){
+					callback(e)
+				}
+			}
+			else {
+				callback(error)
+			}
+		})
 	}
 }

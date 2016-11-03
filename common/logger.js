@@ -17,7 +17,7 @@ log4js.configure({
 		{ type: 'console' },
 		{ type: 'dateFile',
 			filename: logDirectory + 'error',
-			pattern: "-yyyy-MM-dd-hh.log",
+			pattern: "-yyyy-MM-dd.log",
 			alwaysIncludePattern: true,
 			category: 'cheese',
 		}]

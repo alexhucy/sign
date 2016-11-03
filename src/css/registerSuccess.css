@@ -1,0 +1,41 @@
+body{
+    background: rgb(240,240,240);
+    font-family:"微软雅黑";
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration: none;
+}
+.registerSuccess section{
+    padding-bottom:30px;
+}
+.registerSuccess section article div img{
+    width:85%;
+    height:36%;
+    position: relative;
+    left:10%;
+}
+.registerSuccess footer div{
+    width:100%;
+    margin-top:10px;
+}
+.registerSuccess footer div button{
+    width:85%;
+    margin:0 auto;
+    display: block;
+    height:45px;
+    border:none;
+    font-size:20px;
+    color: white;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+}
+.registerSuccess footer div .continueRegister{
+    background: rgb(80,212,129);
+    margin-bottom:18px;
+}
+.registerSuccess footer div .lookRegister{
+    background: rgb(246,164,35);
+}

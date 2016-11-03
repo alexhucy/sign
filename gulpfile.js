@@ -7,7 +7,11 @@ var gulp = require('gulp'),
 		minifycss = require('gulp-minify-css'),//css压缩
 		uglify = require('gulp-uglify'),//js压缩
 		concat = require('gulp-concat'),//文件合并
-		rename = require('gulp-rename');//文件更名
+		rename = require('gulp-rename'),//文件更名
+		cdn = require('gulp-cdn-replace'),
+		rev = require('gulp-rev');
+
+var env = process.env.NODE_ENV;
 
 gulp.task('eslint', function () {
 	
@@ -43,5 +47,22 @@ gulp.task('minifyjs', function() {
 		.pipe(gulp.dest('public/js'));  //输出
 });
 
-gulp.task('default',['serve'])
 
+gulp.task('CDNReplace', function () {
+	  var url = env === "production"
+		  ? ''
+		  : '/static'
+		gulp.src('src/views/*.html')
+			.pipe(cdn({
+				dir: './src',
+				root: {
+					js: url,
+					css: url
+				}
+			}))
+			.pipe(gulp.dest('./views'));
+
+
+});
+
+gulp.task('default',['serve'])
