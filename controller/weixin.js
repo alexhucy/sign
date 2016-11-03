@@ -31,6 +31,7 @@ module.exports = {
 		if(req.session && req.session.data){
 			data = req.session.data.signup_info
 			activity = req.session.data.activity_info
+			delete req.session.data
 			res.render('check',{data: data, activity: activity})
 		}
 		else{
@@ -60,7 +61,6 @@ module.exports = {
 	order: function (req, res) {
 		wxService.getOrderList(function (err, data) {
 			if(err === null || err === '' || err === undefined){
-				console.log(data)
 				res.render('registration',{orders: data})
 			}
 			else{

@@ -17,7 +17,7 @@
 </header>
 <!--报名表单-->
     <div class="bm-content" >
-        <form action="">
+        <form action="/sign" method="post">
         <input class="input-text" type="text" placeholder="参赛者姓名" onfocus="FocusIn(this,'参赛者姓名')" onblur="NameLenFocusOut(this)" required name="user_name">
         <div class="bm-select" id="element_id" style="position: relative;">
             <select class="province" data-first-title="选择省" required name="province_name">
@@ -29,10 +29,10 @@
         </div>
         <input class="input-text" type="text" placeholder="所在学校" required="required" name="school_name">
         <div class="bm-select" id="custom_data">
-            <select name="grade" class="group" data-first-title="选择年级组" required name="grade_name">
+            <select class="group" data-first-title="选择年级组" required name="grade_name">
                 <option value="">选择年级组</option>
             </select>
-            <select name="grade" class="grade" data-first-title="选择年级" required name="class_name">
+            <select class="grade" data-first-title="选择年级" required name="class_name">
                 <option value="">选择年级</option>
                 <option value=""></option>
             </select>
