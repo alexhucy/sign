@@ -50,8 +50,12 @@
     <!--支付按钮-->
     <div class="ch-footer">
         <div>稍后支付</div>
-        <a href="/success"><div>立即支付</div></a>
+        <a href="javascript:;" id="pay" origin="<%= data.id %>"><div>立即支付</div></a>
     </div>
+
+		<div style="position: fixed;right: 0;top: 55%;">
+			<a href="/order/<%= data.id %>/edit"> <img src="/static/images/edit.png" width="41"></a>
+		</div>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="/static/js/weixinpay.js"></script>

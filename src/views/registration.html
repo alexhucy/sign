@@ -15,6 +15,7 @@
       </header>
       <section>
           <article class="record">
+	          <% if (orders) { %>
 	           <% orders.forEach(function(order){ %>
 		          <div class="registerRecord">
 			          <a href="/order/<%=order.id%>">
@@ -42,6 +43,7 @@
 				        </a>
 		          </div>
 	           <% }) %>
+	          <% } %>
           </article>
       </section>
       <footer></footer>

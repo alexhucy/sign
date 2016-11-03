@@ -11,7 +11,8 @@ var express = require('express'),
 		bodyParser = require('body-parser'),
 	  config = require('./config/config')
 		session = require('express-session'),
-		cookieParser = require('cookie-parser');
+		cookieParser = require('cookie-parser'),
+		wechat = require('wechat');
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname + ''));
@@ -31,7 +32,15 @@ app.use(session({
 	cookie: { secure: false }
 }))
 
+app.use('/wechat/$', wechat(config, function (req, res, next) {
+	
+}));
+
 app.use('/', routes);
+
+app.get('*', function(req, res){
+	res.render('404')
+});
 
 server.listen(app.get('port'), function () {
 	console.log('Express server listening on port ' + app.get('port'));

@@ -3,9 +3,7 @@
  */
 
 var wxService = require('../service/weixinService'),
-		config = require('../config/config'),
-		logger = require('../common/logger'),
-	  router = require('../router')
+		logger = require('../common/logger');
 
 module.exports = {
 	/**
@@ -27,14 +25,15 @@ module.exports = {
 	 */
 	confirm: function (req, res) {
 		var data = {};
-		var activity = {}
+		var activity = {};
 		if(req.session && req.session.data){
-			data = req.session.data.signup_info
-			activity = req.session.data.activity_info
+			data = req.session.data.signup_info;
+			activity = req.session.data.activity_info;
+			delete req.session.data;
 			res.render('check',{data: data, activity: activity})
 		}
 		else{
-			wxService.getOrder(req.params.id, function (err, body) {
+			wxService.getOrder(req.cookies.Authorization, req.params.id, function (err, body) {
 				if(err === null || err === '' || err === undefined){
 					data = body.signup_info;
 					activity = body.activity_info;
@@ -55,26 +54,58 @@ module.exports = {
 	},
 
 	/**
-	 * 产看订单
+	 * 产看订单列表
 	 */
 	order: function (req, res) {
-		wxService.getOrderList(function (err, data) {
+		wxService.getOrderList(req.cookies.Authorization, function (err, data) {
 			if(err === null || err === '' || err === undefined){
-				console.log(data)
 				res.render('registration',{orders: data})
 			}
 			else{
-				res.render('registration')
+				res.redirect('/404')
 			}
 		})
 	},
 
 	/**
+	 * 编辑订单信息
+	 */
+	orderEdit: function (req, res) {
+		var data = {};
+		wxService.getOrder(req.cookies.Authorization, req.params.id, function (err, body) {
+			if(err === null || err === '' || err === undefined){
+				data = body.signup_info;
+				res.render('edit',{data: data})
+			}
+			else{
+				res.render('edit',{data: data})
+			}
+		})
+	},
+	
+	/**
+	 * 更新订单信息
+	 */
+	orderUpdate: function (req, res) {
+		var order = req.body;
+		wxService.updateOrder(req.cookies.Authorization, req.params.id, order, function (err, data) {
+			if(err === null || err === undefined || err === ''){
+				req.session.data = data
+				res.redirect('/order/' + data.signup_info.id)
+			}
+			else{
+				res.redirect('/order/')
+			}
+		})
+		
+	},
+	
+	/**
 	 * 报名form提交
 	 */
 	sign: function (req, res,data) {
 		var data = req.body
-		wxService.sign(data, function (err, data) {
+		wxService.sign(req.cookies.Authorization, data, function (err, data) {
 			if(err === '' || err === null || err === undefined){
 				req.session.data = data
 				res.redirect('/order/' + data.signup_info.id)
@@ -107,14 +138,21 @@ module.exports = {
 
 	
 	pay: function (req, res) {
-		var order = req.body;
-		wxService.pay(order, function (err, result) {
-			 if(err){
-				 res.json(err)
-			 }
-			 else{
-				 res.json(result)
-			 }
+		wxService.getPayInfo(req.cookies.Authorization, req.params.id, function (err, data) {
+			if(err === null || err === '' || err === undefined ){
+				wxService.pay(data, function (err, result) {
+					if(err){
+						res.json(err)
+					}
+					else{
+						res.json(result)
+					}
+				})
+			}
+			else{
+				res.json(err)
+			}
 		})
+
 	}
 }

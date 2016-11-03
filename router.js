@@ -6,23 +6,26 @@ var express = require('express'),
 		oauth = require('./middleware/oauth'),
 		weixin = require('./controller/weixin');
 
-router.get('/', oauth, weixin.index)
+router.get('/', oauth, weixin.index);
 
-router.post('/api/payment', weixin.pay)
+router.post('/api/payment', weixin.pay);
 
-router.get('/register', weixin.register)
+router.get('/register', oauth, weixin.register);
 
-router.post('/api/jsconfig', weixin.getJSConfig)
+router.post('/api/jsconfig', weixin.getJSConfig);
 
-router.get('/order', weixin.order)
+router.get('/order', oauth, weixin.order);
 
-router.get('/order/:id', weixin.confirm)
+router.get('/order/:id', oauth, weixin.confirm);
 
-router.get('/success', weixin.success)
+router.get('/order/:id/edit', oauth, weixin.orderEdit);
 
-router.post('/sign', weixin.sign)
+router.post('/order/:id/update', weixin.orderUpdate)
 
-router.post('/test', function (req, res) {
-	console.log(req)
-})
+router.get('/success', oauth, weixin.success);
+
+router.post('/sign', weixin.sign);
+
+router.get('/api/getOrder/:id', oauth, weixin.pay);
+
 module.exports = router;
