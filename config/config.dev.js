@@ -6,6 +6,7 @@ module.exports = {
 	appid: 'wxc3378269c5fd45a7',
 	appsecret: '5019a6f743905ac296df161fba2a7c4a',
 	mchId: '1370367102',
+	token: 'Taidii',
 	notifyUrl: 'http://edu.ngrok.chainz.net ',
 	app_key: 'node_app',
 	app_secret:'1234',
