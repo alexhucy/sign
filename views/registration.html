@@ -15,6 +15,7 @@
       </header>
       <section>
           <article class="record">
+	          <% if (orders) { %>
 	           <% orders.forEach(function(order){ %>
 		          <div class="registerRecord">
 			          <a href="/order/<%=order.id%>">
@@ -42,6 +43,15 @@
 				        </a>
 		          </div>
 	           <% }) %>
+	          <% } %>
+
+	          <% if (!orders) { %>
+	            <div style="width: 50%;margin: 20px auto 0;text-align: center">
+		            <img src="/static/images/empty.png" width="100%">
+		            <p>暂无报名信息~</p>
+	            </div>
+						<% }%>
+
           </article>
       </section>
       <footer></footer>

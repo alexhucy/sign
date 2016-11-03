@@ -15,34 +15,34 @@ $('#custom_data').cxSelect({
 	jsonSub: 'sub',
 	data: [
 		{
-			name:'100',value: '小学低龄组',sub:[
+			name:'小学低龄组',value: '小学低龄组',sub:[
 			{
-				name: '101',value: '二年级'
+				name: '二年级',value: '二年级'
 			},{
-				name: '102',value: '三年级'
+				name: '三年级',value: '三年级'
 			}
 		]
 		},
 		{
-			name: '200',value: '小学高龄组',sub:[
+			name: '小学高龄组',value: '小学高龄组',sub:[
 			{
-				name:'201',value: '四年级'
+				name:'四年级',value: '四年级'
 			},
 			{
-				name:'202',value: '五年级'
+				name:'五年级',value: '五年级'
 			},
 			{
-				name:'203',value: '六年级'
+				name:'六年级',value: '六年级'
 			}
 		]
 		},
 		{
-			name: '300',value: '初中组',sub:[
+			name: '初中组',value: '初中组',sub:[
 			{
-				name:'301',value: '初一'
+				name:'初一',value: '初一'
 			},
 			{
-				name:'302',value: '初二'
+				name:'初二',value: '初二'
 			},
 			{
 				name:'303',value: '初三'
@@ -50,15 +50,15 @@ $('#custom_data').cxSelect({
 		]
 		},
 		{
-			name: '400',value: '高中组',sub:[
+			name: '高中组',value: '高中组',sub:[
 			{
-				name:'401',value: '高一'
+				name:'高一',value: '高一'
 			},
 			{
-				name:'402',value: '高二'
+				name:'高二',value: '高二'
 			},
 			{
-				name:'403',value: '高三'
+				name:'高三',value: '高三'
 			}
 		]
 		}

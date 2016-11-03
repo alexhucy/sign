@@ -38,6 +38,9 @@ app.use('/wechat/$', wechat(config, function (req, res, next) {
 
 app.use('/', routes);
 
+app.get('*', function(req, res){
+	res.render('404')
+});
 
 server.listen(app.get('port'), function () {
 	console.log('Express server listening on port ' + app.get('port'));
