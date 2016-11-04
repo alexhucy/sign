@@ -52,7 +52,6 @@ function change(_this) {
 function EmailFocusOut(_this) {
 	var email = _this.value;
 	var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-	debugger
 	if (email == '') return
 	else if (!reg.test(email)){
 		_this.value = '';
@@ -92,7 +91,6 @@ $('.bm-content form input[type="submit"]').on('click',function () {
 	var province = $('.bm-content select').eq(0).val();//省
 	var city = $('.bm-content select').eq(1).val();     //市
 	var area = $('.bm-content select').eq(2).val();     //区
-debugger
 	if (name || family || number || email) {
 		var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 		if (!(/^\D+$/.test(name))) {
@@ -141,7 +139,6 @@ debugger
 			if ($('.bm-content select').eq(2).find('option:checked').val() == '选择县'){
 				$('.bm-content select').eq(2).find('option:checked').val('')
 			}
-			debugger
 		$('.bm-content form').submit()
 	} else {
 		if (!name){

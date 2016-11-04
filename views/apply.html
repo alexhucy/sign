@@ -59,5 +59,17 @@
 		city:"<%= data.city_name|| ''%>",
 		area:"<%= data.district_name || ''%>"
 	})
+
+	$('#custom_data').citys({
+		dataUrl:"/static/js/grade.json",
+		provinceField:'grade_name',
+		cityField:'class_name',
+		nodata:'disable',
+		required: false,
+		province: '<%= data.grade_name %>',
+		city: '<%= data.class_name %>'
+	})
+
+
 </script>
 </html>
