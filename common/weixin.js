@@ -31,42 +31,43 @@ var redisClient = redis.createClient({
 redisClient.on('error', function (err) {
 	logger.error(err)
 })
+exports.client = new OAuth(config.appid, config.appsecret)
+exports.wechatAPI = new API(config.appid, config.appsecret)
+// exports.client = new OAuth(config.appid, config.appsecret, function (unionId, callback) {
+// 	redisClient.get('baoming_' + unionId + ':access_token', function (err, reply) {
+// 		if(err){
+// 			logger.error(err)
+// 			return callback('500', reply)
+// 		}
+// 		callback(null, JSON.parse(reply));
+// 	});
+// }, function (unionId, token, callback) {
+// 	redisClient.set('baoming_' + unionId + ':access_token', JSON.stringify(token), function (err, reply) {
+// 		if(err){
+// 			logger.error(err)
+// 			return callback('500', reply)
+// 		}
+// 		callback(null, reply);
+// 		redisClient.expire('baoming_' + unionId +':access_token', 7200);
+// 	});
+// });
 
-exports.client = new OAuth(config.appid, config.appsecret, function (unionId, callback) {
-	redisClient.get('baoming_' + unionId + ':access_token', function (err, reply) {
-		if(err){
-			logger.error(err)
-			return callback('500', reply)
-		}
-		callback(null, JSON.parse(reply));
-	});
-}, function (unionId, token, callback) {
-	redisClient.set('baoming_' + unionId + ':access_token', JSON.stringify(token), function (err, reply) {
-		if(err){
-			logger.error(err)
-			return callback('500', reply)
-		}
-		callback(null, reply);
-		redisClient.expire('baoming_' + unionId +':access_token', 7200);
-	});
-});
 
-
-exports.wechatAPI = new API(config.appid, config.appsecret, function (callback) {
-	redisClient.get('baoming_access_token', function (err, reply) {
-		if(err){
-			logger.error(err)
-			return callback('500', reply)
-		}
-		callback(null, JSON.parse(reply));
-	});
-}, function (token, callback) {
-	redisClient.set('baoming_access_token', JSON.stringify(token), function (err, reply) {
-		if(err){
-			logger.error(err)
-			return callback('500', reply)
-		}
-		callback(null, reply);
-		redisClient.expire('baoming_access_token', 7200);
-	});
-})
+// exports.wechatAPI = new API(config.appid, config.appsecret, function (callback) {
+// 	redisClient.get('baoming_access_token', function (err, reply) {
+// 		if(err){
+// 			logger.error(err)
+// 			return callback('500', reply)
+// 		}
+// 		callback(null, JSON.parse(reply));
+// 	});
+// }, function (token, callback) {
+// 	redisClient.set('baoming_access_token', JSON.stringify(token), function (err, reply) {
+// 		if(err){
+// 			logger.error(err)
+// 			return callback('500', reply)
+// 		}
+// 		callback(null, reply);
+// 		redisClient.expire('baoming_access_token', 7200);
+// 	});
+// })
