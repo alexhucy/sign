@@ -125,7 +125,7 @@ debugger
 			$('.bm-content input').eq(3).addClass('invalid');
 			$('.bm-content input').eq(3).attr('placeholder','手机号码格式错误');
 			return false
-		}else if ( !reg.test(number)){
+		}else if ( !reg.test(email)){
 			$('.bm-content input').eq(5).val('');
 			$('.bm-content input').eq(5).addClass('invalid');
 			$('.bm-content input').eq(5).attr('placeholder','邮箱格式错误');
@@ -144,6 +144,10 @@ debugger
 			$('.bm-content input').eq(0).val('');
 			$('.bm-content input').eq(0).addClass('invalid');
 			$('.bm-content input').eq(0).attr('placeholder','输入不能为空');
+		}else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))){
+			$('.bm-content input').eq(0).val('');
+			$('.bm-content input').eq(0).addClass('invalid');
+			$('.bm-content input').eq(0).attr('placeholder','长度超过限制');
 		}
 		if (!family){
 			$('.bm-content input').eq(2).val('');

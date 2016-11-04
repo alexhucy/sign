@@ -15,10 +15,12 @@
     <span class="left"><a href="/order/"><img src="/static/images/user.png"></a></span>
 </header>
     <!--确认个人订单信息-->
+    <% if(data.signup_state !== 1){ %>
     <div class="ch-header">
         <span>还差最后一步就完成报名啦</span>
         <span>支付之前核对一下个人信息哦</span>
     </div>
+		<% } %>
     <div class="ch-content">
     <div class="ch-content-table">
         <section>
@@ -44,18 +46,20 @@
     <!--大赛信息-->
     <div class="ch-pay">
         <section><span>大赛名称:<%= activity.activity_name %></span><span></span></section>
-        <section><span>金额:<%= activity.activity_cost %></span><span></span></section>
+        <section><span>金额:<%= activity.activity_cost/100 %>元</span><span></span></section>
     </div>
 
     <!--支付按钮-->
+<% if(data.signup_state !== 1){ %>
     <div class="ch-footer">
-        <div>稍后支付</div>
+        <a href="/order" > <div style="background: #666;color:#fff">稍后支付</div></a>
         <a href="javascript:;" id="pay" origin="<%= data.id %>"><div>立即支付</div></a>
     </div>
 
 		<div style="position: fixed;right: 0;top: 55%;">
 			<a href="/order/<%= data.id %>/edit"> <img src="/static/images/edit.png" width="41"></a>
 		</div>
+<%}%>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="/static/js/weixinpay.js"></script>

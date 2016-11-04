@@ -17,7 +17,15 @@ module.exports = {
 	 *报名
 	 */
 	register: function (req, res) {
-		res.render('apply')
+		var data = {};
+		var error = '';
+		if(req.session.data){
+			data = req.session.data
+			error = req.session.error
+			delete req.session.data;
+			delete req.session.error
+		}
+		res.render('apply', {data: data, error: error})
 	},
 	
 	/**
@@ -40,7 +48,7 @@ module.exports = {
 					res.render('check',{data: data, activity: activity})
 				}
 				else{
-					res.render('check',{data: data, activity: activity})
+					res.redirect('/404')
 				}
 			})
 		}
@@ -72,15 +80,25 @@ module.exports = {
 	 */
 	orderEdit: function (req, res) {
 		var data = {};
-		wxService.getOrder(req.cookies.Authorization, req.params.id, function (err, body) {
-			if(err === null || err === '' || err === undefined){
-				data = body.signup_info;
-				res.render('edit',{data: data})
-			}
-			else{
-				res.render('edit',{data: data})
-			}
-		})
+		var error = '';
+		if(req.session && req.session.data){
+			data = req.session.data;
+			error = req.session.error;
+			delete req.session.data;
+			delete req.session.error
+			res.render('edit',{data: data, error: error})
+		}
+		else{
+			wxService.getOrder(req.cookies.Authorization, req.params.id, function (err, body) {
+				if(err === null || err === '' || err === undefined){
+					data = body.signup_info;
+					res.render('edit',{data: data, error: error})
+				}
+				else{
+					res.redirect('/404')
+				}
+			})
+		}
 	},
 	
 	/**
@@ -91,10 +109,13 @@ module.exports = {
 		wxService.updateOrder(req.cookies.Authorization, req.params.id, order, function (err, data) {
 			if(err === null || err === undefined || err === ''){
 				req.session.data = data
-				res.redirect('/order/' + data.signup_info.id)
+				res.redirect('/order/' + req.params.id)
 			}
 			else{
-				res.redirect('/order/')
+				order.id = req.params.id
+				req.session.data = order;
+				req.session.error = err;
+				res.redirect('/order/' + req.params.id + '/edit/')
 			}
 		})
 		
@@ -111,6 +132,8 @@ module.exports = {
 				res.redirect('/order/' + data.signup_info.id)
 			}
 			else{
+				req.session.data = req.body
+				req.session.error = err
 				res.redirect('/register')
 			}
 		})

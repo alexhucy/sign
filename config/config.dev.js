@@ -3,15 +3,15 @@
  */
 
 module.exports = {
-	appid: 'wxd84a057c5ec212c9',
-	appsecret: '83ab4fc43b334594d8124ab6439f9ff7',
+	appid: 'wxc3378269c5fd45a7',
+	appsecret: '5019a6f743905ac296df161fba2a7c4a',
 	mchId: '1370367102',
-	// notifyUrl: 'http://bestyiwan.s1.natapp.cc',
-	notifyUrl: ' http://edu1.tunnel.qydev.com',
+	token: 'Taidii',
+	partnerKey: 'fa7f290a56b7d6edaed2b74c261d0732',
+	notifyUrl: 'http://back.test.baoming.xingaokaowang.cn/order/wxpay/callback/',
 	app_key: 'node_app',
 	app_secret:'1234',
-	// domain: 'http://bestyiwan.s1.natapp.cc',
-	domain: 'http://edu1.tunnel.qydev.com',
+	domain: 'http://edu.ngrok.chainz.net',
 	logic: {
 		host:'back.test.baoming.xingaokaowang.cn',
 		port:'80',
