@@ -14,13 +14,12 @@ module.exports = function (req, res, next) {
 	}
 	wxService.getInfoFromWeixin(code, function (err, result) {
 		if(err) {
-			// res.redirect(wxService.getAuthorizeURL(config.domain + req.path,'', 'snsapi_userinfo'))
-			res.render('index')
+			res.redirect(wxService.getAuthorizeURL(config.domain + req.path,'', 'snsapi_userinfo'))
 		}
 		else if(result && result.subscribe) {
 			wxService.getToken(result, function (err, token) {
 				if(err === null || err === '' || err === undefined){
-					res.cookie('Authorization', 'JWT '+ token)
+					res.cookie('Authorization', 'JWT ' + token)
 					return next()
 				}
 				else{

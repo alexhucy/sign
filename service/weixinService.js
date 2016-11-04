@@ -8,8 +8,7 @@ var wechatAPI = require('../common/weixin').wechatAPI,
 		config = require('../config/config'),
 		logger = require('../common/logger'),
 		jwt = require('jsonwebtoken'),
-		request = require('request'),
-		http = require('http');
+		remote = require('../common/remote');
 
 module.exports = {
 	/**
@@ -29,7 +28,6 @@ module.exports = {
 	 */
 	getJSConfig: function (param, callback) {
 		wechatAPI.getJsConfig(param, function (err, result) {
-			logger.error('getJSConfig' + err)
 			callback(err, result)
 		});
 	},
@@ -88,15 +86,14 @@ module.exports = {
 	 */
 	getToken: function (user, callback) {
 		var info = {}
-
 		if(user && user.openid && user.nickname){
 			info = {
 				"openid" : user.openid,
 				"nickname": user.nickname
 			}
 		}
-
 		var postData = JSON.stringify(info)
+		
 		var options = {
 			host: config.logic.host,
 			port: config.logic.port,
@@ -108,35 +105,8 @@ module.exports = {
 			}
 		};
 
-		var req = http.request(options, function (res) {
-			var body = ''
-			res.on('data', function (chunk) {
-				body += chunk;
-			}).on('end', function () {
-				try{
-					var data = JSON.parse(body);
-				}
-				catch (e){
-					logger.error('getToken' + e)
-					return callback(e)
-				}
-				if (res.statusCode >= 200 && res.statusCode < 300) {
-					callback(null, data.token)
-				}
-				else {
-					logger.error('getToken' + data)
-					callback(data)
-				}
-			})
-		});
+		remote.post(options, postData, callback)
 
-		req.on('error', function (e) {
-			logger.error('getToken' + e)
-			callback(e)
-		});
-
-		req.write(postData);
-		req.end();
 	},
 	
 	/**
@@ -156,36 +126,8 @@ module.exports = {
 				'Content-Length': Buffer.byteLength(postData,'utf8')
 			}
 		};
-		var req = http.request(options, function (res) {
-			var body = '';
-			res.on('data', function (chunk) {
-				body += chunk
-			}).on('end', function () {
-				try {
-					var data = JSON.parse(body);
-				}
-				catch (e){
-					logger.error('sign:' + e)
-					return callback(e)
-				}
-				if(res.statusCode >= 200 && res.statusCode <300) {
-					callback(null, data)
-				}
-				else{
-					logger.error('sign:' + data.msg || data)
-					callback(data)
-				}
-			})
-		});
-		
-		req.on('error', function (e) {
-			logger.error('sign:' + e)
-			callback(e)
-		});
-		
-		req.write(postData);
 
-		req.end();
+		remote.post(options, postData, callback)
 	},
 
 
@@ -200,29 +142,10 @@ module.exports = {
 				'Authorization': token
 			}
 		};
-		request(options, function (error, response, body) {
-			if(error){
-				callback(error)
-			}
-			else {
-				var data = {};
-				try {
-					data = JSON.parse(body)
-				}
-				catch (e) {
-					logger('getOrderList:' + e)
-					return callback(e)
-				}
-				if (response.statusCode >= 200 && response.statusCode < 300) {
-					callback(null, data)
-				}
-				else {
-					logger.error('getOrderList:' + data.msg)
-					callback(data.msg)
-				}
-			}
-		})
+
+		remote.get(options, callback)
 	},
+
 
 	/**
 	 * 获取单个订单信息
@@ -237,28 +160,7 @@ module.exports = {
 				'Authorization': token
 			}
 		};
-		request(options, function (error, response, body) {
-			if(error){
-				callback(error)
-			}
-			else {
-				var data = {};
-				try {
-					data = JSON.parse(body)
-				}
-				catch (e){
-					logger('getOrder:' + e)
-					return callback(e)
-				}
-				if (response.statusCode >= 200 && response.statusCode < 300){
-					callback(null, data)
-				}
-				else{
-					logger.error('getOrder:'+ data.msg)
-					callback(data.msg)
-				}
-			}
-		})
+		remote.get(options, callback)
 	},
 
 	/**
@@ -280,36 +182,7 @@ module.exports = {
 				'Content-Length': Buffer.byteLength(postData,'utf8')
 			}
 		};
-		var req = http.request(options, function (res) {
-			var body = '';
-			res.on('data', function (chunk) {
-				body += chunk
-			}).on('end', function () {
-				try {
-					var data = JSON.parse(body);
-				}
-				catch (e){
-					logger.error(e)
-					return callback(e)
-				}
-				if(res.statusCode >= 200 && res.statusCode <300) {
-					callback(null, data)
-				}
-				else{
-					logger.error('updateOrder:' + data.msg)
-					callback(data.msg)
-				}
-			})
-		});
-
-		req.on('error', function (e) {
-			logger.error('updateOrder:' + e)
-			callback(e)
-		});
-
-		req.write(postData);
-
-		req.end();
+		remote.post(options, postData, callback)
 	},
 
 	/**
@@ -319,33 +192,12 @@ module.exports = {
 	 */
 	getPayInfo: function (token, id, callback) {
 		var options = {
-			url: 'http://'+ config.logic.host + ':' + config.logic.port + config.logic.payInfo.replace('{id}', id),
+			url: 'http://' + config.logic.host + ':' + config.logic.port + config.logic.payInfo.replace('{id}', id),
 			headers: {
 				'Content-Type': 'application/json',
 				'Authorization': token
 			}
 		};
-		request(options, function (error, response, body) {
-			if(error){
-				callback(error)
-			}
-			else {
-				var data = {};
-				try {
-					data = JSON.parse(body)
-				}
-				catch (e) {
-					logger('getPayInfo:' + e)
-					return callback(e)
-				}
-				if (response.statusCode >= 200 && response.statusCode < 300) {
-					callback(null, data)
-				}
-				else {
-					logger.error('getPayInfo:' + data.msg)
-					callback(data.msg)
-				}
-			}
-		})
+		remote.get(options, callback)
 	}
 }

@@ -17,7 +17,13 @@ module.exports = {
 	 *报名
 	 */
 	register: function (req, res) {
-		res.render('apply')
+		var data = {};
+		var error = '';
+		if(req.session.data){
+			data = req.session.data
+			error = req.session.error
+		}
+		res.render('apply', {data: data})
 	},
 	
 	/**
@@ -40,7 +46,7 @@ module.exports = {
 					res.render('check',{data: data, activity: activity})
 				}
 				else{
-					res.render('check',{data: data, activity: activity})
+					res.redirect('/404')
 				}
 			})
 		}
@@ -78,7 +84,7 @@ module.exports = {
 				res.render('edit',{data: data})
 			}
 			else{
-				res.render('edit',{data: data})
+				res.redirect('/404')
 			}
 		})
 	},
@@ -91,10 +97,10 @@ module.exports = {
 		wxService.updateOrder(req.cookies.Authorization, req.params.id, order, function (err, data) {
 			if(err === null || err === undefined || err === ''){
 				req.session.data = data
-				res.redirect('/order/' + data.signup_info.id)
+				res.redirect('/order/' + order.id)
 			}
 			else{
-				res.redirect('/order/')
+				res.redirect('/edit/' + order.id)
 			}
 		})
 		
@@ -111,6 +117,8 @@ module.exports = {
 				res.redirect('/order/' + data.signup_info.id)
 			}
 			else{
+				req.session.data = data
+				req.session.error = err
 				res.redirect('/register')
 			}
 		})
@@ -141,6 +149,8 @@ module.exports = {
 		wxService.getPayInfo(req.cookies.Authorization, req.params.id, function (err, data) {
 			if(err === null || err === '' || err === undefined ){
 				wxService.pay(data, function (err, result) {
+					console.log(err)
+					console.log(result)
 					if(err){
 						res.json(err)
 					}

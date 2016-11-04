@@ -12,6 +12,7 @@ var config = require('../config/config'),
 		appId: config.appid,
 		mchId: config.mchId,
 		notifyUrl: config.notifyUrl,
+		partnerKey: config.partnerKey
 	};
 
 exports.payment = new Payment(initConfig);

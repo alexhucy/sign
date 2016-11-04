@@ -8,11 +8,9 @@ var express = require('express'),
 
 router.get('/', oauth, weixin.index);
 
-router.post('/api/payment', weixin.pay);
-
 router.get('/register', oauth, weixin.register);
 
-router.post('/api/jsconfig', weixin.getJSConfig);
+router.post('/wechat/api/jsconfig', weixin.getJSConfig);
 
 router.get('/order', oauth, weixin.order);
 
@@ -26,6 +24,6 @@ router.get('/success', oauth, weixin.success);
 
 router.post('/sign', weixin.sign);
 
-router.get('/api/getOrder/:id', oauth, weixin.pay);
+router.get('/wechat/api/getOrder/:id',  weixin.pay);
 
 module.exports = router;

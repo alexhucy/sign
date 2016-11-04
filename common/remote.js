@@ -1,0 +1,67 @@
+/**
+ * Created by Alex on 2016/11/4.
+ */
+
+var http = require('http');
+var request = require('request');
+var logger = require('../common/logger')
+
+module.exports = {
+	get: function (options, callback) {
+		request(options, function (error, response, body) {
+			if(error){
+				callback(error)
+			}
+			else {
+				var data = {};
+				try {
+					data = JSON.parse(body)
+				}
+				catch (e) {
+					logger.error(body)
+					return callback(e)
+				}
+				if (response.statusCode >= 200 && response.statusCode < 300) {
+					callback(null, data)
+				}
+				else {
+					logger.error(data.msg || data)
+					callback(data.msg || data)
+				}
+			}
+		})
+	},
+	
+	post: function (options, postData, callback) {
+		var req = http.request(options, function (res) {
+			var body = ''
+			res.on('data', function (chunk) {
+				body += chunk;
+			}).on('end', function () {
+				try{
+					var data = JSON.parse(body);
+				}
+				catch (e){
+					logger.error(body)
+					return callback(e)
+				}
+
+				if (res.statusCode >= 200 && res.statusCode < 300) {
+					callback(null, data)
+				}
+				else {
+					logger.error('getToken' + body)
+					callback(data.msg || data.detail)
+				}
+			})
+		});
+		
+		req.on('error', function (e) {
+			logger.error('getToken' + e)
+			callback(e)
+		});
+		
+		req.write(postData);
+		req.end();
+	}
+};
