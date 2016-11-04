@@ -16,7 +16,7 @@
 		factory(jQuery);
 	}
 }(function ($) {
-	$.fn.citys = function(parameter,getApi) {
+	$.fn.grade = function(parameter,getApi) {
 		if(typeof parameter == 'function'){ //重载
 			getApi = parameter;
 			parameter = {};
@@ -125,7 +125,7 @@
 						province:function(){
 							$province.empty();
 							if(!options.required){
-								$province.append('<option value="">选择省</option>');
+								$province.append('<option value="">选择年级组</option>');
 							}
 							for(i in province){
 								$province.append('<option value="'+i+'">'+province[i]+'</option>');
@@ -138,7 +138,7 @@
 						city:function(){
 							$city.empty();
 							if(!options.required){
-								$city.append('<option value="">选择市</option>');
+								$city.append('<option value="">选择年级</option>');
 							}
 							if(options.nodata=='disabled'){
 								$city.prop('disabled',$.isEmptyObject(city));
@@ -195,11 +195,6 @@
 						options.city = $(this).val();
 						options.area = 0;
 						updateData();
-						if($.isEmptyObject(area)){
-							$area.css('display','none');
-						}else {
-							$area.css('display','inline-block');
-						}
 						format.area();
 						options.onChange(_api.getInfo());
 					});

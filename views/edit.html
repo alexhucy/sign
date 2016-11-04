@@ -38,7 +38,7 @@
 		</div>
 		<input class="input-text" type="text" placeholder="家长姓名"  onfocus="FocusIn(this,'家长姓名')" onblur="NameLenFocusOut(this)" name="parent_name" value="<%=data.parent_name%>">
 		<input class="input-text" type="tel" placeholder="联系电话"   onfocus="FocusIn(this,'联系电话')" onblur="NumLenFocusOut(this)" name="phone_number" value="<%=data.phone_number%>">
-		<input class="input-text" type="text" placeholder="家庭住址"  name="address" onfocus="FocusIn(this,'家庭住址')" onblur="NameLenFocusOut(this)" value="<%=data.address%>">
+		<input class="input-text" type="text" placeholder="家庭住址"  name="address" onfocus="FocusIn(this,'家庭住址')" value="<%=data.address%>">
 		<input class="input-text" type="email" placeholder="邮箱"  onfocus="FocusIn(this,'邮箱')" onblur="EmailFocusOut(this)" name="email" value="<%=data.email%>">
 		<input type="submit" value="提交">
 	</form>
@@ -49,15 +49,29 @@
 </div>
 <script src="/static/js/jquery-3.1.1.min.js"></script>
 <script src="/static/js/citys_2.js"></script>
-<script src="/static/js/jquery.cxselect.min.js"></script>
+<script src="/static/js/citys.js"></script>
 <script src="/static/js/interaction.js"></script>
 <script>
 
 	$('#demo_2').citys({
-		nodata:'hidden',
+		dataUrl:"http://7xj2zq.com1.z0.glb.clouddn.com/city-list.json",
+		nodata:'disable',
+		required: false,
+		provinceField:'province_name', //省份字段名
+		cityField:'city_name',         //城市字段名
+		areaField:'district_name',         //地区字段名
 		province:'<%= data.province_name %>',
 		city:'<%= data.city_name %>',
 		area:'<%= data.district_name %>'
+	})
+	$('custom_data').grade({
+		dataUrl:"/static/js/grade.json",
+		provinceField:'grade_name',
+		cityField:'class_name',
+		nodata:'disable',
+		required: false,
+		province: '<%= data.grade_name %>',
+		city: '<%= data.class_name %>'
 	})
 </script>
 </body>

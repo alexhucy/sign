@@ -76,6 +76,8 @@ header .right{
     -webkit-appearance:none;
     width:31%;
     padding:8px 5px;
+    padding-left: 0px;
+    padding-right:14px;
     color: #BBBBBB;
     text-indent: 10px;
     position: relative;
