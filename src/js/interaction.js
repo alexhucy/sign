@@ -143,7 +143,7 @@ $('.bm-content form input[type="submit"]').on('click',function () {
 			$('.bm-content input').eq(0).val('');
 			$('.bm-content input').eq(0).addClass('invalid');
 			$('.bm-content input').eq(0).attr('placeholder','输入不能为空');
-		}else if(!(/^\S{1,32}$/.test(name))){
+		}else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))){
 			$('.bm-content input').eq(0).val('');
 			$('.bm-content input').eq(0).addClass('invalid');
 			$('.bm-content input').eq(0).attr('placeholder','长度超过限制');
@@ -152,7 +152,7 @@ $('.bm-content form input[type="submit"]').on('click',function () {
 			$('.bm-content input').eq(2).val('');
 			$('.bm-content input').eq(2).addClass('invalid');
 			$('.bm-content input').eq(2).attr('placeholder','输入不能为空');
-		} else if(!(/^\S{1,32}$/.test(family))){
+		} else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(family))){
 			$('.bm-content input').eq(2).val('');
 			$('.bm-content input').eq(2).addClass('invalid');
 			$('.bm-content input').eq(2).attr('placeholder','长度超过限制');
