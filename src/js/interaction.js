@@ -138,6 +138,10 @@ debugger
 		SelectChange(2)
 		SelectChange(3)
 		SelectChange(4)
+			if ($('.bm-content select').eq(2).find('option:checked').val() == '选择县'){
+				$('.bm-content select').eq(2).find('option:checked').val('')
+			}
+			debugger
 		$('.bm-content form').submit()
 	} else {
 		if (!name){
