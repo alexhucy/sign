@@ -72,8 +72,9 @@ $('#custom_data').cxSelect({
 * */
 function NameLenFocusOut(_this) {
 	var name = _this.value;
+	debugger
 	if (name == '') return
-	else if(!(/^\S{1,32}$/.test(name))){
+	else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))){
 		_this.value = '';
 		_this.classList.add('invalid');
 		_this.setAttribute('placeholder','长度超过限制,请重新输入');
