@@ -17,9 +17,9 @@ module.exports = function (req, res, next) {
 			res.redirect(wxService.getAuthorizeURL(config.domain + req.path,'', 'snsapi_userinfo'))
 		}
 		else if(result && result.subscribe) {
-			wxService.getToken(result, function (err, token) {
+			wxService.getToken(result, function (err, data) {
 				if(err === null || err === '' || err === undefined){
-					res.cookie('Authorization', 'JWT ' + token)
+					res.cookie('Authorization', 'JWT ' + data.token)
 					return next()
 				}
 				else{
