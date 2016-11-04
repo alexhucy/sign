@@ -32,7 +32,8 @@ var redisClient = redis.createClient({
 redisClient.on('error', function (err) {
 	logger.error(err)
 })
-
+// exports.client = new OAuth(config.appid, config.appsecret)
+// exports.wechatAPI = new API(config.appid, config.appsecret)
 exports.client = new OAuth(config.appid, config.appsecret, function (unionId, callback) {
 	redisClient.get('baoming_' + unionId + ':access_token', function (err, reply) {
 		if(err){
