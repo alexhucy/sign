@@ -20,33 +20,36 @@
         <form action="/sign" method="post">
         <input class="input-text" type="text" placeholder="参赛者姓名" onfocus="FocusIn(this,'参赛者姓名')" onblur="NameLenFocusOut(this)"  name="user_name" value="<%=data.user_name || ''%>">
         <div class="bm-select" id="demo" style="position: relative;">
-            <select id="province" name="province_name" onfocus="change(this)">
+            <select id="province" name="province_name"  onfocus="change(this)">
             </select>
             <select id="city" name="city_name"  onfocus="change(this)">
             </select>
             <select id="area" name="district_name"  onfocus="change(this)">
             </select>
         </div>
-        <input class="input-text" type="text" placeholder="所在学校" name="school_name" onfocus="FocusIn(this,'所在学校')"  value="<%=data.school_name || ''%>">
+
+        <input class="input-text" type="text" placeholder="所在学校" name="school_name" onfocus="FocusIn(this,'所在学校')" value="<%=data.school_name || ''%>">
         <div class="bm-select" id="custom_data">
-            <select class="group" name="grade_name" onfocus="change(this)">
-	            <option><%= data.grade_name || ''%></option>
+            <select class="group" name="grade_name" data-first-title="选择年级组" onfocus="change(this)">
+                <option value="" selected="selected">选择年级组</option>
             </select>
-            <select class="grade" name="class_name" onfocus="change(this)">
-	            <option><%= data.class_name || ''%></option>
+            <select class="grade" name="class_name" data-first-title="选择年级" onfocus="change(this)">
+                <option value="" selected="selected">选择年级</option>
             </select>
         </div>
+
         <input class="input-text" type="text" placeholder="家长姓名"  onfocus="FocusIn(this,'家长姓名')" onblur="NameLenFocusOut(this)" name="parent_name" value="<%=data.parent_name || ''%>">
         <input class="input-text" type="tel" placeholder="联系电话"   onfocus="FocusIn(this,'联系电话')" onblur="NumLenFocusOut(this)" name="phone_number" value="<%=data.phone_number || ''%>">
         <input class="input-text" type="text" placeholder="家庭住址"  name="address" onfocus="FocusIn(this,'家庭住址')"  value="<%=data.address || ''%>">
         <input class="input-text" type="email" placeholder="邮箱"  onfocus="FocusIn(this,'邮箱')" onblur="EmailFocusOut(this)" name="email" value="<%=data.email || ''%>">
 	       <p class="error"><%=error%></p>
+
         <input type="submit" value="提交">
         </form>
     </div>
 <script src="/static/js/jquery-3.1.1.min.js"></script>
 <script src="/static/js/citys_2.js"></script>
-<script src="/static/js/jquery.cxselect.min.js"></script>
+<script src="/static/js/citys.js"></script>
 <script src="/static/js/interaction.js"></script>
 </body>
 <script>
