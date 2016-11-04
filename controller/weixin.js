@@ -42,6 +42,7 @@ module.exports = {
 		}
 		else{
 			wxService.getOrder(req.cookies.Authorization, req.params.id, function (err, body) {
+				console.log(body)
 				if(err === null || err === '' || err === undefined){
 					data = body.signup_info;
 					activity = body.activity_info;

@@ -13,8 +13,8 @@ module.exports = {
 	app_secret:'1234',
 	domain: 'http://edu.ngrok.chainz.net',
 	logic: {
-		host:'back.test.baoming.xingaokaowang.cn',
-		port:'80',
+		host:'192.168.1.105',
+		port:'8000',
 		createUser:'/api/get-token',
 		sign: '/signup/signup/',
 		orderList: '/signup/signup/list/',

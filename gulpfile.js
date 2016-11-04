@@ -48,21 +48,4 @@ gulp.task('minifyjs', function() {
 });
 
 
-gulp.task('CDNReplace', function () {
-	  var url = env === "production"
-		  ? ''
-		  : '/static'
-		gulp.src('src/views/*.html')
-			.pipe(cdn({
-				dir: './src',
-				root: {
-					js: url,
-					css: url
-				}
-			}))
-			.pipe(gulp.dest('./views'));
-
-
-});
-
 gulp.task('default',['serve'])

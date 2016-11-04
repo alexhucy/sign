@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>我的报名</title>
+    <title>希望杯作文大赛</title>
     <link rel="stylesheet" href="/static/css/registration.css">
 </head>
 <body>
@@ -45,7 +45,7 @@
 	           <% }) %>
 	          <% } %>
 
-	          <% if (!orders) { %>
+	          <% if (!orders.length) { %>
 	            <div style="width: 50%;margin: 20px auto 0;text-align: center">
 		            <img src="/static/images/empty.png" width="100%">
 		            <p>暂无报名信息~</p>
