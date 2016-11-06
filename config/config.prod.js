@@ -3,9 +3,25 @@
  */
 
 module.exports = {
-	appid: 'wxd84a057c5ec212c9',
-	appsecret: '83ab4fc43b334594d8124ab6439f9ff7',
+	appid: 'wx0ef00bb37bdf1ce7',
+	appsecret: '511771339779ce2855af5dce8584b315',
 	mchId: '1370367102',
-	notifyUrl: 'https://edu.ngrok.chainz.net',
-	domain: 'http://edu.ngrok.chainz.net'
+	token: 'zhonglun',
+	partnerKey: 'fa7f290a56b7d6edaed2b74c261d0732',
+	notifyUrl: 'http://back.baoming.xingaokaowang.cn/order/wxpay/callback/',
+	app_key: 'node_app',
+	app_secret:'1234',
+	domain: 'http://baoming.xingaokaowang.cn',
+	logic: {
+		host:'back.baoming.xingaokaowang.cn',
+		port:'80',
+		createUser:'/api/get-token',
+		sign: '/signup/signup/',
+		orderList: '/signup/signup/list/',
+		orderInfo: '/signup/signup/{id}/order/',
+		updateOrder: '/signup/signup/{id}',
+		payInfo: '/signup/signup/{id}/pay/',
+		commit: '/signup/signup/{id}/commit/'
+	},
+	session_secret:'haojiaoyubaoming'
 }
