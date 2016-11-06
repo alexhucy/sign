@@ -20,10 +20,12 @@ router.get('/order/:id/edit', oauth, weixin.orderEdit);
 
 router.post('/order/:id/update', weixin.orderUpdate)
 
-router.get('/success', oauth, weixin.success);
+router.get('/success',  weixin.success);
 
 router.post('/sign', weixin.sign);
 
 router.get('/wechat/api/getOrder/:id',  weixin.pay);
+
+router.get('/commit/:id', weixin.commit)
 
 module.exports = router;

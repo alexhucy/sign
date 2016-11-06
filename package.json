@@ -16,8 +16,11 @@
     "gulp-cdn-replace": "^0.3.0",
     "gulp-concat": "^2.6.0",
     "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.0.5",
     "gulp-uglify": "^2.0.0",
     "muk": "^0.5.2",
     "supertest": "^2.0.1"

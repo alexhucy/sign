@@ -50,6 +50,7 @@
 		}
 	})
 
+	
 	document.getElementById('pay').addEventListener('click', function () {
 		var id = document.getElementById('pay').getAttribute('origin')
 		ajax({
@@ -57,12 +58,15 @@
 			dataType:'json',
 			method: 'GET',
 			success: function (data) {
+				 data.success = function () {
+					 window.location.href='/success'
+				 }
 					wx.chooseWXPay(data);
 				},
 			error: function (e) {
 
 			}
 		})
-
 	})
+	
 })()

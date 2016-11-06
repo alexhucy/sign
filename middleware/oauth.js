@@ -20,6 +20,7 @@ module.exports = function (req, res, next) {
 			wxService.getToken(result, function (err, data) {
 				if(err === null || err === '' || err === undefined){
 					res.cookie('Authorization', 'JWT ' + data.token)
+					req.cookies.Authorization = 'JWT ' + data.token
 					return next()
 				}
 				else{

@@ -5,15 +5,15 @@
 	<title>希望杯作文大赛</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="/static/css/apply.css">
+	<link rel="stylesheet" href="http://static.baoming.xingaokaowang.cn/css/apply.css">
 	<!--<link rel="stylesheet" href="css/city-picker.css">-->
 </head>
 <body>
 <!--头部-->
 <header>
-	<span class="left"><img src="/static/images/arrow-left.png" onclick="history.back()"></span>
+	<span class="left"><img src="http://static.baoming.xingaokaowang.cn/images/arrow-left.png" onclick="history.back()"></span>
 	<span class="center">填写报名表</span>
-	<span class="left"><a href="/order"><img src="/static/images/user.png"></a></span>
+	<span class="left"><a href="/order"><img src="http://static.baoming.xingaokaowang.cn/images/user.png"></a></span>
 </header>
 <!--报名表单-->
 <div class="bm-content" >
@@ -43,32 +43,34 @@
 	</form>
 </div>
 <!--增加loading图标,透明0.8，居中显示,通过添加删除DisplayNone来显示隐藏-->
-<script src="/static/js/jquery-3.1.1.min.js"></script>
-<script src="/static/js/citys_2.js"></script>
-<script src="/static/js/citys.js"></script>
-<script src="/static/js/interaction.js"></script>
+<script src="http://static.baoming.xingaokaowang.cn/js/jquery-3.1.1.min.js"></script>
+<script src="http://static.baoming.xingaokaowang.cn/js/citys_2.js"></script>
+<script src="http://static.baoming.xingaokaowang.cn/js/citys.js"></script>
+<script src="http://static.baoming.xingaokaowang.cn/js/interaction.js"></script>
 <script>
-
+$(document).ready(function () {
 	$('#demo_2').citys({
-		dataUrl:"http://7xj2zq.com1.z0.glb.clouddn.com/city-list.json",
-		nodata:'hidden',
+		dataUrl: "http://7xj2zq.com1.z0.glb.clouddn.com/city-list.json",
+		nodata: 'disable',
 		required: false,
-		provinceField:'province_name', //省份字段名
-		cityField:'city_name',         //城市字段名
-		areaField:'district_name',         //地区字段名
-		province:'<%= data.province_name %>',
-		city:'<%= data.city_name %>',
-		area:'<%= data.district_name %>'
+		provinceField: 'province_name', //省份字段名
+		cityField: 'city_name',         //城市字段名
+		areaField: 'district_name',         //地区字段名
+		province: '<%= data.province_name %>',
+		city: '<%= data.city_name %>',
+		area: '<%= data.district_name %>'
 	})
+
 	$('#custom_data').grade({
-		dataUrl:"/static/js/grade.json",
-		provinceField:'grade_name',
-		cityField:'class_name',
-		nodata:'disable',
+		dataUrl: "http://static.baoming.xingaokaowang.cn/js/grade.json",
+		provinceField: 'grade_name',
+		cityField: 'class_name',
+		nodata: 'disable',
 		required: false,
 		province: '<%= data.grade_name %>',
 		city: '<%= data.class_name %>'
 	})
+})
 </script>
 </body>
 </html>

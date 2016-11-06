@@ -5,21 +5,7 @@
 *多级联动插件
 **/
 
-$('#demo').citys({
-	dataUrl:"http://7xj2zq.com1.z0.glb.clouddn.com/city-list.json",
-	provinceField:'province_name', //省份字段名
-	cityField:'city_name',         //城市字段名
-	areaField:'district_name',         //地区字段名
-	nodata:'disable',
-	required: false
-})
-$('#custom_data').grade({
-	dataUrl:"/static/js/grade.json",
-	provinceField:'grade_name',
-	cityField:'class_name',
-	nodata:'disable',
-	required: false
-})
+
 
 /**
 报名页表单验证
