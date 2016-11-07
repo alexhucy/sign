@@ -29,7 +29,7 @@ module.exports = {
 	mchId: '1370367102',
 	token: 'Taidii',
 	partnerKey: 'fa7f290a56b7d6edaed2b74c261d0732',
-	notifyUrl: 'http://back.test.baoming.xingaokaowang.cn/order/wxpay/callback/',
+	notifyUrl: 'http://tao.s1.natapp.cc',
 	app_key: 'node_app',
 	app_secret:'1234',
 	domain: 'http://edu.ngrok.chainz.net',

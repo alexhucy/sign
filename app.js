@@ -19,9 +19,9 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname + ''));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/static/',express.static(path.join(__dirname, '/public/')));
+app.use('/static/',express.static(path.join(__dirname, '/src/')));
 app.engine('html', require('ejs-mate'));
-app.set('views', path.join(__dirname, '/views'));
+app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'html');
 app.use(cookieParser())
 app.use(cookieParser(config.session_secret));
