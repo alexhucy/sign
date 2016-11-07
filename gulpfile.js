@@ -38,7 +38,7 @@ gulp.task('serve',  function() {
 //压缩css
 gulp.task('minifycss', function() {
 	return gulp.src('src/css/*.css')
-		.pipe(replace(/\/static/g, 'http://test.baoming.xingaokaowang.cn'))
+		.pipe(replace(/\/static/g, 'http://test.baoming.xingaokaowang.cn/static'))
 		.pipe(rev())
 		.pipe(minifycss())
 		.pipe(gulp.dest('public/css'))
@@ -51,7 +51,7 @@ gulp.task('minifycss', function() {
 //压缩js
 gulp.task('minifyjs', function() {
 	return gulp.src('src/js/*.js')
-		.pipe(replace(/\/static/g, 'http://test.baoming.xingaokaowang.cn'))
+		.pipe(replace(/\/static/g, 'http://test.baoming.xingaokaowang.cn/static'))
 		.pipe(rev())
 		.pipe(uglify())
 		.pipe(gulp.dest('public/js'))
@@ -63,7 +63,7 @@ gulp.task('minifyjs', function() {
 gulp.task('replace-page', function () {
 	return gulp.src(['rev/**/*.json','src/views/*.html'])
 		.pipe(revCollector())
-		.pipe(replace(/\/static/g, 'http://test.baoming.xingaokaowang.cn'))  //这里比较吃正则，每个项目的替换正则都是不一样的
+		.pipe(replace(/\/static/g, 'http://test.baoming.xingaokaowang.cn/static'))  //这里比较吃正则，每个项目的替换正则都是不一样的
 		.pipe(gulp.dest('views'));
 });
 
