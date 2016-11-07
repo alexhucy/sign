@@ -145,8 +145,8 @@ module.exports = {
 	getJSConfig: function (req, res) {
 		var data = req.body;
 		var param = {
-			debug: data.debug || false,
-			jsApiList: data.jsApiList,
+			debug: false,
+			jsApiList: ['chooseWXPay','onMenuShareTimeline', 'onMenuShareAppMessage'],
 			url: req.headers.referer
 		};
 		wxService.getJSConfig(param, function (err, result) {

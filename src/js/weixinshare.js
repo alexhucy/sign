@@ -25,16 +25,10 @@
 		//发送数据
 		xhr.send(options.data);
 	}
-
-
-	var obj = {
-		jsApiList:['onMenuShareTimeline', 'onMenuShareAppMessage']
-	}
-
+	
 
 	ajax({
 		url:'/wechat/api/jsconfig',
-		data: JSON.stringify(obj),
 		dataType:'json',
 		method: 'POST',
 		success: function (data) {
@@ -47,11 +41,11 @@
 
 	wx.ready(function(){
 		wx.onMenuShareTimeline({
-			imgUrl: 'http://edu.ngrok.chainz.net/static/images/background.jpg',
+			imgUrl: '/static/images/share.jpg'
 		})
 
 		wx.onMenuShareAppMessage({
-			imgUrl: 'http://edu.ngrok.chainz.net/static/images/background.jpg',
+			imgUrl: '/static/images/share.jpg'
 		})
 	});
 })()

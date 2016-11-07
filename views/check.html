@@ -5,14 +5,14 @@
     <title>希望杯作文大赛</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="/static/css/check-87d7941979.css">
+    <link rel="stylesheet" href="http://test.baoming.xingaokaowang.cn/css/check-87d7941979.css">
 </head>
 <body>
 
 <header>
-    <span class="left"><img src="/static/images/arrow-left.png" onclick="history.back()"></span>
+    <span class="left"><img src="http://test.baoming.xingaokaowang.cn/images/arrow-left.png" onclick="history.back()"></span>
     <span class="center">支付报名费</span>
-    <span class="left"><a href="/order/"><img src="/static/images/user.png"></a></span>
+    <span class="left"><a href="/order/"><img src="http://test.baoming.xingaokaowang.cn/images/user.png"></a></span>
 </header>
     <!--确认个人订单信息-->
     <% if(data.signup_state !== 1){ %>
@@ -60,7 +60,7 @@
 		<% } %>
 
 		<div style="position: fixed;right: 0;top: 55%;">
-			<a href="/order/<%= data.id %>/edit"> <img src="/static/images/edit.png" width="41"></a>
+			<a href="/order/<%= data.id %>/edit"> <img src="http://test.baoming.xingaokaowang.cn/images/edit.png" width="41"></a>
 		</div>
 
 		<% if(data.amount == 0) { %>
@@ -71,5 +71,5 @@
 <%}%>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="/static/js/weixinpay-165905802d.js"></script>
+<script src="http://test.baoming.xingaokaowang.cn/js/weixinpay-2512f4f0ae.js"></script>
 </html>

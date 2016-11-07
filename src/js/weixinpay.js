@@ -31,14 +31,9 @@
 		xhr.send(options.data);
 	}
 
-	var obj = {
-		jsApiList:['chooseWXPay','onMenuShareTimeline', 'onMenuShareAppMessage']
-	}
-
 
 	ajax({
 		url:'/wechat/api/jsconfig',
-		data: JSON.stringify(obj),
 		dataType:'json',
 		method: 'POST',
 		success: function (data) {
@@ -71,11 +66,11 @@
 	
 	wx.ready(function(){
 		wx.onMenuShareTimeline({
-			imgUrl: 'http://edu.ngrok.chainz.net/static/images/share.jpg'
+			imgUrl: '/static/images/share.jpg'
 		})
 
 		wx.onMenuShareAppMessage({
-			imgUrl: 'http://edu.ngrok.chainz.net/static/images/share.jpg'
+			imgUrl: '/static/images/share.jpg'
 		})
 	});
 	
