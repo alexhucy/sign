@@ -14,16 +14,10 @@
 function NameLenFocusOut(_this) {
 	var name = _this.value;
 	if (name == '') return
-	else if (!(/^\D+$/.test(name))) {
+	if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))){
 		_this.value = '';
 		_this.classList.add('invalid');
-		_this.setAttribute('placeholder','名字不能有数字');
-		return
-	}
-	else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))){
-		_this.value = '';
-		_this.classList.add('invalid');
-		_this.setAttribute('placeholder','长度超过限制,请重新输入');
+		_this.setAttribute('placeholder','不能含数字和特殊字符');
 	}
 }
 function FocusIn(_this,sum1) {
@@ -63,8 +57,8 @@ function SelectChange(num) {
 	var province = $('.bm-content select').eq(num).find('option:checked').text();//省
 	$('.bm-content select').eq(num).find('option:checked').val(province)
 }
-
 $('.bm-content form input[type="submit"]').on('click',function () {
+	var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
 	var name = $('.bm-content input').eq(0).val();     //参赛者姓名
 	var school = $('.bm-content input').eq(1).val();     //学校
@@ -77,75 +71,69 @@ $('.bm-content form input[type="submit"]').on('click',function () {
 	var province = $('.bm-content select').eq(0).val();//省
 	var city = $('.bm-content select').eq(1).val();     //市
 	var area = $('.bm-content select').eq(2).val();     //区
-	if (name || family || number || email) {
-		var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-		if (!(/^\D+$/.test(name))) {
-			if (name == ''){
+
+		if (name!= '' && family!='' && number!='' && email!='' && school!='' && address!='' && groupId!='' && gradeId!=''&&province!=''&&city!=''){
+			if (!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(family))) {
+				$('.bm-content input').eq(2).val('');
+				$('.bm-content input').eq(2).addClass('invalid');
+				$('.bm-content input').eq(2).attr('placeholder', '不能含数字和特殊字符');
 				return false
 			}
-			$('.bm-content input').eq(0).val('');
-			$('.bm-content input').eq(0).addClass('invalid');
-			$('.bm-content input').eq(0).attr('placeholder', '名字不能有数字');
-			return false
-		} else if (!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))) {
-			$('.bm-content input').eq(0).val('');
-			$('.bm-content input').eq(0).addClass('invalid');
-			$('.bm-content input').eq(0).attr('placeholder', '长度超过限制');
-			return false
-		} else if (!(/^\D+$/.test(family))) {
-			if (name == ''){
+			if (!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))) {
+				$('.bm-content input').eq(0).val('');
+				$('.bm-content input').eq(0).addClass('invalid');
+				$('.bm-content input').eq(0).attr('placeholder', '不能含数字和特殊字符');
 				return false
 			}
-			$('.bm-content input').eq(2).val('');
-			$('.bm-content input').eq(2).addClass('invalid');
-			$('.bm-content input').eq(2).attr('placeholder', '名字不能有数字');
-		} else if (!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(family))) {
-			$('.bm-content input').eq(2).val('');
-			$('.bm-content input').eq(2).addClass('invalid');
-			$('.bm-content input').eq(2).attr('placeholder', '长度超过限制');
-			return false
-		}else if (!(/^1[34578]\d{9}$/.test(number))){
-			$('.bm-content input').eq(3).val('');
-			$('.bm-content input').eq(3).addClass('invalid');
-			$('.bm-content input').eq(3).attr('placeholder','手机号码格式错误');
-			return false
-		}else if ( !reg.test(email)){
-			$('.bm-content input').eq(5).val('');
-			$('.bm-content input').eq(5).addClass('invalid');
-			$('.bm-content input').eq(5).attr('placeholder','邮箱格式错误');
-			return false
-		}
-	}
-		if (name && family && number && email && school && address && groupId && gradeId&&province&&city){
-		SelectChange(0)
-		SelectChange(1)
-		SelectChange(2)
-		SelectChange(3)
-		SelectChange(4)
+			if (!(/^1[34578]\d{9}$/.test(number))) {
+				$('.bm-content input').eq(3).val('');
+				$('.bm-content input').eq(3).addClass('invalid');
+				$('.bm-content input').eq(3).attr('placeholder', '手机号码格式错误');
+				return false
+			}
+			if ( !reg.test(email)) {
+				$('.bm-content input').eq(5).val('');
+				$('.bm-content input').eq(5).addClass('invalid');
+				$('.bm-content input').eq(5).attr('placeholder', '邮箱格式错误');
+				return false
+			}
+			SelectChange(0)
+			SelectChange(1)
+			SelectChange(2)
+			SelectChange(3)
+			SelectChange(4)
 			if ($('.bm-content select').eq(2).find('option:checked').val() == '选择县'){
 				$('.bm-content select').eq(2).find('option:checked').val('')
 			}
 		$('.bm-content form').submit()
 	} else {
-		if (!name){
-			$('.bm-content input').eq(0).val('');
-			$('.bm-content input').eq(0).addClass('invalid');
-			$('.bm-content input').eq(0).attr('placeholder','输入不能为空');
+		if (name == ''){
+			if ($('.bm-content input').eq(0).attr('placeholder') == '不能含数字和特殊字符') {
+
+			}else {
+				$('.bm-content input').eq(0).val('');
+				$('.bm-content input').eq(0).addClass('invalid');
+				$('.bm-content input').eq(0).attr('placeholder','输入不能为空');
+			}
 		}else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(name))){
 			$('.bm-content input').eq(0).val('');
 			$('.bm-content input').eq(0).addClass('invalid');
-			$('.bm-content input').eq(0).attr('placeholder','长度超过限制');
+			$('.bm-content input').eq(0).attr('placeholder','不能含数字和特殊字符');
 		}
-		if (!family){
-			$('.bm-content input').eq(2).val('');
-			$('.bm-content input').eq(2).addClass('invalid');
-			$('.bm-content input').eq(2).attr('placeholder','输入不能为空');
+		if (family == ''){
+			if ($('.bm-content input').eq(2).attr('placeholder') == '不能含数字和特殊字符') {
+
+			}else {
+				$('.bm-content input').eq(2).val('');
+				$('.bm-content input').eq(2).addClass('invalid');
+				$('.bm-content input').eq(2).attr('placeholder', '输入不能为空');
+			}
 		} else if(!(/^[\u4e00-\u9fa5_a-zA-Z\s]{1,32}$/.test(family))){
 			$('.bm-content input').eq(2).val('');
 			$('.bm-content input').eq(2).addClass('invalid');
-			$('.bm-content input').eq(2).attr('placeholder','长度超过限制');
+			$('.bm-content input').eq(2).attr('placeholder','不能含数字和特殊字符');
 		}
-		if (!number){
+		if (number == ''){
 			if ($('.bm-content input').eq(3).attr('placeholder') == '手机号码格式错误'){
 
 			}else {
@@ -158,7 +146,7 @@ $('.bm-content form input[type="submit"]').on('click',function () {
 			$('.bm-content input').eq(3).addClass('invalid');
 			$('.bm-content input').eq(3).attr('placeholder','手机号码格式错误');
 		}
-		if (!email) {
+		if (email == '') {
 			if ($('.bm-content input').eq(5).attr('placeholder') == '邮箱格式错误') {
 
 			} else {
@@ -172,29 +160,29 @@ $('.bm-content form input[type="submit"]').on('click',function () {
 			$('.bm-content input').eq(5).addClass('invalid');
 			$('.bm-content input').eq(5).attr('placeholder','邮箱格式错误');
 		}
-		if (!address){
+		if (address == ''){
 			$('.bm-content input').eq(4).val('');
 			$('.bm-content input').eq(4).addClass('invalid');
 			$('.bm-content input').eq(4).attr('placeholder','输入不能为空');
 		}
-		if (!school){
+		if (school == ''){
 			$('.bm-content input').eq(1).val('');
 			$('.bm-content input').eq(1).addClass('invalid');
 			$('.bm-content input').eq(1).attr('placeholder','输入不能为空');
 		}
-		if (!groupId){
+		if (groupId == ''){
 			$('.bm-content select').eq(3).css('border','1px solid red');
 		}
-		if (!gradeId){
+		if (gradeId == ''){
 			$('.bm-content select').eq(4).css('border','1px solid red');
 		}
-		if (!province){
+		if (province == ''){
 			$('.bm-content select').eq(0).css('border','1px solid red');
 		}
-		if (!city){
+		if (city == ''){
 			$('.bm-content select').eq(1).css('border','1px solid red');
 		}
-		if (!area){
+		if (area == ''){
 			$('.bm-content select').eq(2).css('border','1px solid red');
 		}
 		return false

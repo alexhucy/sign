@@ -57,11 +57,11 @@
         <a href="/order" > <div style="background: #666;color:#fff">稍后支付</div></a>
         <a href="javascript:;" id="pay" origin="<%= data.id %>"><div>立即支付</div></a>
     </div>
-
-		<div style="position: fixed;right: 0;top: 55%;">
-			<a href="/order/<%= data.id %>/edit"> <img src="http://static.baoming.xingaokaowang.cn/images/edit.png" width="41"></a>
-		</div>
 		<% } %>
+
+<div style="position: fixed;right: 0;top: 55%;">
+    <a href="/order/<%= data.id %>/edit"> <img src="http://static.baoming.xingaokaowang.cn/images/edit.png" width="41"></a>
+</div>
 
 		<% if(data.amount == 0) { %>
 		<div class="ch-footer">
