@@ -24,9 +24,12 @@ module.exports = {
 				if (response.statusCode >= 200 && response.statusCode < 300) {
 					callback(null, data)
 				}
+				else if (response.statusCode == 403){
+					callback(403, data)
+				}
 				else {
 					logger.error(data.msg || data)
-					callback(data.msg || data)
+					callback(data.msg || '系统繁忙,请稍后再试')
 				}
 			}
 		})
@@ -49,9 +52,12 @@ module.exports = {
 				if (res.statusCode >= 200 && res.statusCode < 300) {
 					callback(null, data)
 				}
+				else if (response.statusCode == 403){
+					callback(403, data)
+				}
 				else {
 					logger.error('getToken' + body)
-					callback(data.msg || data.detail)
+					callback(data.msg || '系统繁忙,请稍后再试')
 				}
 			})
 		});

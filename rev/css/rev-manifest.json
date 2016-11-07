@@ -1,8 +1,8 @@
 {
-  "apply.min.css": "apply-d366a5932b.min.css",
-  "check.min.css": "check-bbc1cec3bc.min.css",
-  "index.min.css": "index-d8cb1fec27.min.css",
-  "registerDetail.min.css": "registerDetail-2022fede5a.min.css",
-  "registerSuccess.min.css": "registerSuccess-9ec05a4044.min.css",
-  "registration.min.css": "registration-f5e9dc120b.min.css"
+  "apply.css": "apply-f4088dfb94.css",
+  "check.css": "check-87d7941979.css",
+  "index.css": "index-234f73e9a6.css",
+  "registerDetail.css": "registerDetail-7921b196fa.css",
+  "registerSuccess.css": "registerSuccess-9121853e1d.css",
+  "registration.css": "registration-3519fabbaa.css"
 }

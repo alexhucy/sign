@@ -49,30 +49,30 @@
 <script src="/static/js/citys_2.js"></script>
 <script src="/static/js/citys.js"></script>
 <script src="/static/js/interaction.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/static/js/weixinshare.js"></script>
 </body>
 <script>
-	$('#demo').citys({
-		dataUrl: "http://7xj2zq.com1.z0.glb.clouddn.com/city-list.json",
-		nodata: 'disable',
-		required: false,
-		provinceField: 'province_name', //省份字段名
-		cityField: 'city_name',         //城市字段名
-		areaField: 'district_name',         //地区字段名
-		province: "<%= data.province_name || '' %>",
-		city: "<%= data.city_name || '' %>",
-		area: "<%= data.district_name || ''%>"
-	})
+		$('#demo').citys({
+			dataUrl: "http://7xj2zq.com1.z0.glb.clouddn.com/city-list.json",
+			nodata: 'disable',
+			required: false,
+			provinceField: 'province_name', //省份字段名
+			cityField: 'city_name',         //城市字段名
+			areaField: 'district_name',         //地区字段名
+			province: "<%= data.province_name ||''%>",
+			city: "<%= data.city_name || ''%>",
+			area: "<%= data.district_name || '' %>"
+		})
 
-	$('#custom_data').grade({
-		dataUrl:"/static/js/grade.json",
-		provinceField:'grade_name',
-		cityField:'class_name',
-		nodata:'disable',
-		required: false,
-		province: "<%= data.grade_name || ''%>",
-		city: "<%= data.class_name || ''%>"
-	})
-
-
+		$('#custom_data').grade({
+			dataUrl:"/static/js/grade.json",
+			provinceField:'grade_name',
+			cityField:'class_name',
+			nodata:'disable',
+			required: false,
+			province: "<%= data.grade_name || ''%>",
+			city: "<%= data.class_name || ''%>"
+		})
 </script>
 </html>

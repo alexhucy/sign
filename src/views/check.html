@@ -44,7 +44,7 @@
     </div>
 
     <!--大赛信息-->
-    <div class="ch-pay">
+    <div class="ch-pay" style="margin-bottom: 3em">
         <section><span>大赛名称:</span><span><%= activity.activity_name %></span></section>
         <section><span>金额:</span><span><% if(data.amount == 0) { %> <div style="display:inline;color:red">限时免费  </div><span style="text-decoration: line-through"><%= activity.activity_cost/100%></span><span>元</span> <% } %>
 	        <% if(data.amount != 0){ %> <%= activity.activity_cost/100 %>元  <%}%></span></section>
@@ -57,11 +57,11 @@
         <a href="/order" > <div style="background: #666;color:#fff">稍后支付</div></a>
         <a href="javascript:;" id="pay" origin="<%= data.id %>"><div>立即支付</div></a>
     </div>
+		<% } %>
 
 		<div style="position: fixed;right: 0;top: 55%;">
 			<a href="/order/<%= data.id %>/edit"> <img src="/static/images/edit.png" width="41"></a>
 		</div>
-		<% } %>
 
 		<% if(data.amount == 0) { %>
 		<div class="ch-footer">

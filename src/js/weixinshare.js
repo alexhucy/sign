@@ -1,13 +1,8 @@
 /**
- * Created by Alex on 2016/11/1.
+ * Created by Alex on 2016/11/7.
  */
 
 ;(function () {
-	
-	/**
-	 * ajax封装
-	 * @param options {url, data, method, dataType, timeout, success, error}
-	 */
 	var ajax = function (options) {
 		var xhr = new XMLHttpRequest();
 		//设置xhr请求的超时时间
@@ -31,8 +26,9 @@
 		xhr.send(options.data);
 	}
 
+
 	var obj = {
-		jsApiList:['chooseWXPay','onMenuShareTimeline', 'onMenuShareAppMessage']
+		jsApiList:['onMenuShareTimeline', 'onMenuShareAppMessage']
 	}
 
 
@@ -49,34 +45,24 @@
 		}
 	})
 
-	if(document.getElementById('pay')) {
-		document.getElementById('pay').addEventListener('click', function () {
-			var id = document.getElementById('pay').getAttribute('origin')
-			ajax({
-				url: '/wechat/api/getOrder/' + id,
-				dataType: 'json',
-				method: 'GET',
-				success: function (data) {
-					data.success = function () {
-						window.location.href = '/success'
-					}
-					wx.chooseWXPay(data);
-				},
-				error: function (e) {
-
-				}
-			})
-		})
-	}
-	
 	wx.ready(function(){
 		wx.onMenuShareTimeline({
-			imgUrl: 'http://edu.ngrok.chainz.net/static/images/share.jpg'
+			title: '', // 分享标题
+			desc: '', // 分享描述
+			link: '', // 分享链接
+			imgUrl: 'http://edu.ngrok.chainz.net/static/images/share.jpg', // 分享图标
+			type: '', // 分享类型,music、video或link，不填默认为link
+			dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			success: function () {
+				// 用户确认分享后执行的回调函数
+			},
+			cancel: function () {
+				// 用户取消分享后执行的回调函数
+			}
 		})
 
 		wx.onMenuShareAppMessage({
 			imgUrl: 'http://edu.ngrok.chainz.net/static/images/share.jpg'
 		})
 	});
-	
 })()

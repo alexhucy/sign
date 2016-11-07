@@ -5,14 +5,14 @@
     <title>希望杯作文大赛</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="http://static.baoming.xingaokaowang.cn/css/check.css">
+    <link rel="stylesheet" href="/static/css/check-87d7941979.css">
 </head>
 <body>
 
 <header>
-    <span class="left"><img src="http://static.baoming.xingaokaowang.cn/images/arrow-left.png" onclick="history.back()"></span>
+    <span class="left"><img src="/static/images/arrow-left.png" onclick="history.back()"></span>
     <span class="center">支付报名费</span>
-    <span class="left"><a href="/order/"><img src="http://static.baoming.xingaokaowang.cn/images/user.png"></a></span>
+    <span class="left"><a href="/order/"><img src="/static/images/user.png"></a></span>
 </header>
     <!--确认个人订单信息-->
     <% if(data.signup_state !== 1){ %>
@@ -44,7 +44,7 @@
     </div>
 
     <!--大赛信息-->
-    <div class="ch-pay">
+    <div class="ch-pay" style="margin-bottom: 3em">
         <section><span>大赛名称:</span><span><%= activity.activity_name %></span></section>
         <section><span>金额:</span><span><% if(data.amount == 0) { %> <div style="display:inline;color:red">限时免费  </div><span style="text-decoration: line-through"><%= activity.activity_cost/100%></span><span>元</span> <% } %>
 	        <% if(data.amount != 0){ %> <%= activity.activity_cost/100 %>元  <%}%></span></section>
@@ -57,11 +57,11 @@
         <a href="/order" > <div style="background: #666;color:#fff">稍后支付</div></a>
         <a href="javascript:;" id="pay" origin="<%= data.id %>"><div>立即支付</div></a>
     </div>
+		<% } %>
 
 		<div style="position: fixed;right: 0;top: 55%;">
-			<a href="/order/<%= data.id %>/edit"> <img src="http://static.baoming.xingaokaowang.cn/images/edit.png" width="41"></a>
+			<a href="/order/<%= data.id %>/edit"> <img src="/static/images/edit.png" width="41"></a>
 		</div>
-		<% } %>
 
 		<% if(data.amount == 0) { %>
 		<div class="ch-footer">
@@ -71,5 +71,5 @@
 <%}%>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="http://static.baoming.xingaokaowang.cn/js/weixinpay.js"></script>
+<script src="/static/js/weixinpay-165905802d.js"></script>
 </html>
