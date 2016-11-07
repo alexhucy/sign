@@ -199,5 +199,17 @@ module.exports = {
 			}
 		};
 		remote.get(options, callback)
+	},
+
+
+	commitInfo: function (token, id, callback) {
+		var options = {
+			url: 'http://' + config.logic.host + ':' + config.logic.port + config.logic.commit.replace('{id}', id),
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': token
+			}
+		};
+		remote.get(options, callback)
 	}
 }

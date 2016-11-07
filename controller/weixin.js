@@ -42,8 +42,8 @@ module.exports = {
 		}
 		else{
 			wxService.getOrder(req.cookies.Authorization, req.params.id, function (err, body) {
-				console.log(body)
 				if(err === null || err === '' || err === undefined){
+					console.log(body)
 					data = body.signup_info;
 					activity = body.activity_info;
 					res.render('check',{data: data, activity: activity})
@@ -59,7 +59,7 @@ module.exports = {
 	 * 支付成功
 	 */
 	success: function (req, res) {
-		res.render('registersuccess')
+		res.render('registerSuccess')
 	},
 
 	/**
@@ -178,5 +178,17 @@ module.exports = {
 			}
 		})
 
+	},
+	
+	
+	commit: function (req, res) {
+		wxService.commitInfo(req.cookies.Authorization, req.params.id, function (err, data) {
+			if(err === null || err === '' || err === undefined ){
+				res.redirect('/success')
+			}
+			else{
+				res.redirect('/404')
+			}
+		})
 	}
 }

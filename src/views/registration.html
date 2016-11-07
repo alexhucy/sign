@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>我的报名</title>
-    <link rel="stylesheet" href="css/registration.css">
+    <title>希望杯作文大赛</title>
+    <link rel="stylesheet" href="/static/css/registration.css">
 </head>
 <body>
   <div class="registration">
@@ -38,12 +38,20 @@
 						          <span class="orangeFont">待支付</span>
 						          <% } %>
 					          </div>
-					          <div class="right"><%= order.activity_cost %>元</div>
+					          <div class="right"><%= order.activity_cost/100 %>元</div>
 				          </div>
 				        </a>
 		          </div>
 	           <% }) %>
 	          <% } %>
+
+	          <% if (!orders.length) { %>
+	            <div style="width: 50%;margin: 20px auto 0;text-align: center">
+		            <img src="/static/images/empty.png" width="100%">
+		            <p>暂无报名信息~</p>
+	            </div>
+						<% }%>
+
           </article>
       </section>
       <footer></footer>

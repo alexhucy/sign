@@ -20,7 +20,8 @@ module.exports = {
 		orderList: '/signup/signup/list/',
 		orderInfo: '/signup/signup/{id}/order/',
 		updateOrder: '/signup/signup/{id}',
-		payInfo: '/signup/signup/{id}/pay/'
+		payInfo: '/signup/signup/{id}/pay/',
+		commit: '/signup/signup/{id}/commit/'
 	},
 	session_secret:'haojiaoyubaoming'
 }

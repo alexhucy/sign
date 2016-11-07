@@ -9,7 +9,11 @@ var gulp = require('gulp'),
 		concat = require('gulp-concat'),//文件合并
 		rename = require('gulp-rename'),//文件更名
 		cdn = require('gulp-cdn-replace'),
-		rev = require('gulp-rev');
+		rev = require('gulp-rev'), //- 对文件名加MD5后缀
+		revCollector = require('gulp-rev-collector'),
+		replace = require('gulp-replace'),
+		minifyHTML   = require('gulp-minify-html');
+
 
 var env = process.env.NODE_ENV;
 
@@ -33,19 +37,30 @@ gulp.task('serve',  function() {
 
 //压缩css
 gulp.task('minifycss', function() {
-	return gulp.src('src/css/*.css')      //压缩的文件
-		.pipe(gulp.dest('public/css'))   //输出文件夹
-		.pipe(minifycss());   //执行压缩
+	return gulp.src('src/css/*.css')
+		// .pipe(replace(/\/static/g, 'http://static.baoming.xingaokaowang.cn'))
+		.pipe(minifycss())
+		.pipe(gulp.dest('public/css'))
+
 });
 
 //压缩js
 gulp.task('minifyjs', function() {
 	return gulp.src('src/js/*.js')
-		.pipe(gulp.dest('public/js'))    //输出main.js到文件夹
-		.pipe(rename({suffix: '.min'}))   //rename压缩后的文件名
-		.pipe(uglify())    //压缩
-		.pipe(gulp.dest('public/js'));  //输出
+		// .pipe(replace(/\/static/g, 'http://static.baoming.xingaokaowang.cn'))
+		.pipe(uglify())
+		.pipe(gulp.dest('public/js'))
 });
+
+
+gulp.task('replace-page', function () {
+	return gulp.src(['rev/**/*.json','src/views/*.html'])
+		.pipe(revCollector())
+		// .pipe(replace(/\/static/g, 'http://static.baoming.xingaokaowang.cn'))  //这里比较吃正则，每个项目的替换正则都是不一样的
+		.pipe(gulp.dest('views'));
+});
+
+gulp.task('prod',['minifycss', 'minifyjs','replace-page']);
 
 
 gulp.task('default',['serve'])
